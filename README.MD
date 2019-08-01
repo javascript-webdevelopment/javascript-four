@@ -41,7 +41,7 @@ const newCar = {
     showOff: function(){
         alert(`I drive a ${this.make}`);
     }
-}
+};
 
 newCar.showOff();
 ```
@@ -49,3 +49,62 @@ newCar.showOff();
 Notice how `showOff` lives on the `newCar` object so the context of the showOff function will be newCar.
 
 ### Explicit Context
+
+Explicit Context is where we explicitely tell a function what it's context is. We can do that by using the three different built in function methods `call`, `apply`, and `bing`.
+
+#### Call
+
+`.call()` is a built method that we can use on Function objects. This will allow us to pass in the object as an argument that we want the context of `this` to refer to. The following arguments will be additional values that we can use. These will need to be comma seperated.
+
+```javascript
+// people object with a method
+const people = {
+    sayName: function(car, year){
+        alert(`My name is ${this.firstName} ${this.lastName} and I drive a ${car} made in ${year}`);
+    };
+};
+
+// two new person objects
+const personOne = {
+    firstName: 'Tayte',
+    lastName: 'Stokes'
+};
+
+const personTwo = {
+    firstName: 'Matt',
+    lastName: 'Bodily'
+};
+
+// call the people method sayName on two different objects
+people.sayName.call(personeOne, 'tesla', 2020);
+people.sayName.call(personTwo, 'masaratti', 2020);
+```
+
+`.apply()` works exactly like how call works, but the only difference is that apply only takes in two arguments so we will pass in new arguments as an array not comma seperated values.
+
+```javascript
+// people object with a method
+const people = {
+    sayName: function(car, year){
+        alert(`My name is ${this.firstName} ${this.lastName} and I drive a ${car} made in ${year}`);
+    };
+};
+
+// two new person objects
+const personOne = {
+    firstName: 'Tayte',
+    lastName: 'Stokes'
+};
+
+const personTwo = {
+    firstName: 'Matt',
+    lastName: 'Bodily'
+};
+
+// apply the people method sayName on two different objects
+people.sayName.apply(personeOne, 'tesla', 2020);
+people.sayName.apply(personTwo, ['masaratti', 2020]);
+```
+
+> Note: It's easy to remember the argument rule like so; Apply starts with an 'a' and so does array. Call starts with a 'c' and so does commas ;)
+
