@@ -80,6 +80,8 @@ people.sayName.call(personeOne, 'tesla', 2020);
 people.sayName.call(personTwo, 'masaratti', 2020);
 ```
 
+#### Apply
+
 `.apply()` works exactly like how call works, but the only difference is that apply only takes in two arguments so we will pass in new arguments as an array not comma seperated values.
 
 ```javascript
@@ -107,6 +109,8 @@ people.sayName.apply(personTwo, ['masaratti', 2020]);
 ```
 
 > Note: It's easy to remember the argument rule like so; Apply starts with an 'a' and so does array. Call starts with a 'c' and so does comma ;)
+
+#### Bind
 
 `.bind()` works very similar to call except it defers the function invokation, meaning it will return an entirely new function.
 
