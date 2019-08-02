@@ -258,3 +258,40 @@ const fishy = new Fish('fishy');
 // we can now use the talk prototype method from the Animal class on the fishy instance
 fishy.talk('bubble bubble');
 ```
+
+## Arrow Functions
+
+Arrow functions are the newest way in Javascript to create a function.
+
+```javascript
+// This function:
+function notArrowFunction(str) {
+  return str
+};
+
+// is the same as this arrow function:
+let arrowFunction1 = (str) => {
+  return str
+};
+
+// which is also the same as this arrow function:
+let arrowFunction2 = str => {
+  return str
+};
+
+// which is also the same as this arrow function:
+let arrowFunction3 = str => str;
+```
+
+Notice how we now use the `=>` rather than the `function` keyword. We also do not have to use parenthesis if we only are expecting a single argument. This is awesome because it allows for really short syntax that's easy to read.
+
+Arrow function also work extremely well as a `callback` function.
+
+```javascript
+const myArray = [1,2,3,4,5];
+
+// keep note of the anonymous arrow function being used as the callback
+const evensArray = myArray.filter((element) => {
+    return element % 2 === 0;
+});
+```
