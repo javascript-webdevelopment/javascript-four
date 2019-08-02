@@ -106,5 +106,155 @@ people.sayName.apply(personeOne, 'tesla', 2020);
 people.sayName.apply(personTwo, ['masaratti', 2020]);
 ```
 
-> Note: It's easy to remember the argument rule like so; Apply starts with an 'a' and so does array. Call starts with a 'c' and so does commas ;)
+> Note: It's easy to remember the argument rule like so; Apply starts with an 'a' and so does array. Call starts with a 'c' and so does comma ;)
 
+`.bind()` works very similar to call except it defers the function invokation, meaning it will return an entirely new function.
+
+```javascript
+// sayName function
+function(car, year){
+    alert(`My name is ${this.firstName} ${this.lastName} and I drive a ${car} made in ${year}`);
+};
+
+// two new person objects
+const personOne = {
+    firstName: 'Tayte',
+    lastName: 'Stokes',
+};
+
+const personTwo = {
+    firstName: 'Matt',
+    lastName: 'Bodily'
+};
+
+// create new functions using the sayName functionality and the object to bind it to
+const personOneBrag = sayName.bind(personOne, 'Tesla', 2020);
+const personTwoBrag = sayName.bind(personTwo, 'Mazaratti', 2020);
+
+// now we need to manually invoke the newly bound functions
+personOneBrag();
+personTwoBrag();
+```
+
+## Classes
+
+Classes are a newer syntax that we can use as a blueprint to create objects. 
+
+We will use the `class` keyword to declare a new class. It's important to note that classes will start will capital letter.
+
+```javascript
+class Car {
+    
+}
+```
+
+We can create an `instance` or the object from this class by creating a variable and calling upon the class using the `new` keyword.
+
+`new` is the keyword we use to invoke a class.
+
+```javascript
+class Car {
+    
+}
+
+const myCar = new Car();
+
+console.log(myCar) //result: this will be the new car object from the class invokation
+```
+
+### Constructor Function
+
+We can have our class execpt arguments by using a `constructor` function. This function is where we will receive arguments and can then add them as a property to the object that class returns by using the `this`. 
+
+```javascript
+class Car {
+    // define params to receive args in the class
+    constructor(make, model, year){
+        // then add them as props to the object that will be return
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+}
+
+const myCar = new Car('Tesla', 'Model X', 2020);
+```
+
+### ProtoType Functions
+
+Prototype functions are functions that are built into a certain object type or class. We can create a prototype function on our class so that every object that is created from the class will have access to the function.
+
+```javascript
+class Car {
+    constructor(make, model, year){
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+
+    // prototypes go here, outside of the constructor
+    // we should avoid using the function keyword and arrow functions
+    honk(){
+        alert(`Your ${this.make} honked!`);
+    }
+}
+
+const myCar = new Car('Tesla', 'Model X', 2020);
+```
+
+### Extending Classes
+
+We can have a class extend from another class to inherit the properties and protoypes from another class without having to re-write the logic.
+
+We use the keyword `extends` to delcare our new class is extending another class.
+
+```javascript
+class Animal {
+  constructor(name, type){
+      this.name = name;
+      this.type = type;
+  }
+
+  // prototype functions
+  talk(saying){
+    console.log(`${this.name} says: ${saying}`)
+  }
+}
+
+// make another class that extends Animal
+class Fish extends Animal {
+  
+};
+
+const fishy = new Fish();
+```
+
+### Super
+
+`super` is the keyword we can use when extending a class to invoke the construcor method from the class that is being extended. When we invoke `super` we will pass the arguments to the parent classes constructor method.
+
+```javascript
+class Animal {
+  constructor(name, type){
+      this.name = name;
+      this.type = type;
+  }
+
+  talk(saying){
+    console.log(`${this.name} says: ${saying}`)
+  }
+}
+
+class Fish extends Animal {
+    // constrcutor for the fish class to accept arguments
+    constructor(name){
+        // invoke super to call the parent classes constructor
+        super(name, 'Fish');
+    }
+};
+
+const fishy = new Fish('fishy');
+
+// we can now use the talk prototype method from the Animal class on the fishy instance
+fishy.talk('bubble bubble');
+```
